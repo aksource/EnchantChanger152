@@ -11,8 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
@@ -33,7 +31,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid="EnchantChanger", name="EnchantChanger", version="1.6b-universal")
+@Mod(modid="EnchantChanger", name="EnchantChanger", version="1.6h-universal")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false, channels={"EC|Levi","EC|CSC","EC|CS","EC|Sw"}, packetHandler=Packet_EnchantChanger.class)
 public class EnchantChanger //extends BaseMod
 {
@@ -92,9 +90,9 @@ public class EnchantChanger //extends BaseMod
 	public static Enchantment Float;
 	public static int EnchantmentThunderId;
 	public static Enchantment Thunder;
-
-	public static String EcSprites ="/ak/EnchantChanger/textures/gui/items.png";
-	public static String EcTerrain = "/ak/EnchantChanger/textures/terrain.png";
+	
+	public static String EcMeteoPNG = "/mods/ak/EnchantChanger/textures/items/Meteo.png";
+	public static String EcExpBottlePNG = "/mods/ak/EnchantChanger/textures/items/ExExpBottle.png";
 	public static String EcZackSwordPNG ="/ak/EnchantChanger/textures/item/ZackSword.png";
 	public static String EcSephirothSwordPNG ="/ak/EnchantChanger/textures/item/SephirothSword.png";
 	public static String EcCloudSwordPNG ="/ak/EnchantChanger/textures/item/CloudSword.png";
@@ -193,7 +191,7 @@ public class EnchantChanger //extends BaseMod
 		ItemExExpBottle =new EcItemExExpBottle(ExExpBottleID-256).setUnlocalizedName(this.EcTextureDomain + "ExExpBottle").setCreativeTab(tabsEChanger);
 		ItemZackSword = (new EcItemZackSword(ZackSwordItemID-256)).setUnlocalizedName(this.EcTextureDomain + "ZackSword").setCreativeTab(tabsEChanger);
 		ItemCloudSwordCore = (new EcItemCloudSwordCore(FirstSwordItemID -256)).setUnlocalizedName(this.EcTextureDomain + "CloudSwordCore").setCreativeTab(tabsEChanger);
-		ItemCloudSword = (new EcItemCloudSword(CloudSwordItemID-256)).setUnlocalizedName(this.EcTextureDomain + "CloudSword").setCreativeTab(tabsEChanger);
+		ItemCloudSword = (new EcItemCloudSword(CloudSwordItemID-256)).setUnlocalizedName(this.EcTextureDomain + "CloudSword").setCreativeTab(null);
 		ItemSephirothSword = (new EcItemSephirothSword(SephirothSwordItemID-256)).setUnlocalizedName(this.EcTextureDomain + "MasamuneBlade").setCreativeTab(tabsEChanger);
 		ItemUltimateWeapon = (new EcItemUltimateWeapon(UltimateWeaponItemID - 256)).setUnlocalizedName(this.EcTextureDomain + "UltimateWeapon").setCreativeTab(tabsEChanger);
 		ItemPortableEnchantChanger = (new EcItemMaterializer(PortableEnchantChangerID - 256)).setUnlocalizedName(this.EcTextureDomain + "PortableEnchantChanger").setCreativeTab(tabsEChanger);

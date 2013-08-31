@@ -74,7 +74,8 @@ public class EcItemMasterMateria extends Item implements IItemRenderer
 		GL11.glTranslatef(x, y, z);
 		if(type == ItemRenderType.EQUIPPED && mc.gameSettings.thirdPersonView == 0)
 			GL11.glTranslatef(0.3f, 0.2f, 0);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture("/mods/ak/EnchantChanger/textures/gui/materia10.png"));
+		mc.renderEngine.bindTexture("/mods/ak/EnchantChanger/textures/gui/materia10.png");
+//		GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture("/mods/ak/EnchantChanger/textures/gui/materia10.png"));
 //		GL11.glEnable(GL_BLEND);
 //		GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		Tessellator tessellator = Tessellator.instance;

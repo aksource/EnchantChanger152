@@ -1,26 +1,16 @@
 package ak.EnchantChanger;
 
-import java.util.ArrayList;
-
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import ak.EnchantChanger.Client.ClientProxy;
-
 public class EcItemEnchantmentTable extends Item
 {
-
 	public EcItemEnchantmentTable(int par1) {
 		super(par1);
 		maxStackSize = 1;
 		setMaxDamage(0);
-	}
-	public String getTextureFile()
-	{
-		return EnchantChanger.EcSprites;
 	}
 	public boolean hasEffect(ItemStack par1ItemStack)
 	{
@@ -36,10 +26,4 @@ public class EcItemEnchantmentTable extends Item
 
 		return par1ItemStack;
 	}
-//	@Override
-//	public Item setIconIndex(int par1)
-//	{
-//		this.iconIndex = par1;
-//		return this;
-//	}
 }

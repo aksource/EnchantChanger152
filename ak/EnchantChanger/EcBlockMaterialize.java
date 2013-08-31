@@ -43,10 +43,6 @@ public class EcBlockMaterialize extends BlockContainer
     {
         return false;
     }
-	public String getTextureFile()
-    {
-            return EnchantChanger.EcTerrain;
-    }
 	public boolean isOpaqueCube()
     {
         return false;

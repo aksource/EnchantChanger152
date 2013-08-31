@@ -3,30 +3,23 @@ package ak.EnchantChanger.Client;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.projectile.EntityPotion;
-import net.minecraft.potion.PotionHelper;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import ak.EnchantChanger.EnchantChanger;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class EcRenderItemThrowable extends Render
 {
-    /**
-     * Have the icon index (in items.png) that will be used to render the image. Currently, eggs and snowballs uses this
-     * classes.
-     */
-    private int itemIconIndex;
     private float RenderSize;
+    private String tex;
 
-    public EcRenderItemThrowable(int par1, float par2)
+    public EcRenderItemThrowable(float par2, String par3)
     {
-        this.itemIconIndex = par1;
         this.RenderSize = par2;
+        this.tex = par3;
     }
 
     /**
@@ -41,33 +34,20 @@ public class EcRenderItemThrowable extends Render
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glScalef(this.RenderSize, this.RenderSize, this.RenderSize);
-        this.loadTexture(EnchantChanger.EcSprites);
+        this.loadTexture(tex);
         Tessellator var10 = Tessellator.instance;
 
-        if (this.itemIconIndex == 154)
-        {
-            int var11 = PotionHelper.func_77915_a(((EntityPotion)par1Entity).getPotionDamage(), false);
-            float var12 = (float)(var11 >> 16 & 255) / 255.0F;
-            float var13 = (float)(var11 >> 8 & 255) / 255.0F;
-            float var14 = (float)(var11 & 255) / 255.0F;
-            GL11.glColor3f(var12, var13, var14);
-            GL11.glPushMatrix();
-            this.func_77026_a(var10, 141);
-            GL11.glPopMatrix();
-            GL11.glColor3f(1.0F, 1.0F, 1.0F);
-        }
-
-        this.func_77026_a(var10, this.itemIconIndex);
+        this.renderItem(var10);
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPopMatrix();
     }
 
-    private void func_77026_a(Tessellator par1Tessellator, int par2)
+    private void renderItem(Tessellator par1Tessellator)
     {
-        float var3 = (float)(par2 % 16 * 16 + 0) / 256.0F;
-        float var4 = (float)(par2 % 16 * 16 + 16) / 256.0F;
-        float var5 = (float)(par2 / 16 * 16 + 0) / 256.0F;
-        float var6 = (float)(par2 / 16 * 16 + 16) / 256.0F;
+        float var3 = 0f;
+        float var4 = 1f;
+        float var5 = 0f;
+        float var6 = 1f;
         float var7 = 1.0F;
         float var8 = 0.5F;
         float var9 = 0.25F;

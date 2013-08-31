@@ -450,7 +450,8 @@ public class EcItemMateria extends Item implements IItemRenderer
 	{
 		Minecraft mc = Minecraft.getMinecraft();
 		GL11.glPushMatrix();
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture(this.getTextuerfromEnch(item)));
+		mc.renderEngine.bindTexture(this.getTextuerfromEnch(item));
+//		GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture(this.getTextuerfromEnch(item)));
 		GL11.glTranslatef(x, y, z);
 		if(type == ItemRenderType.EQUIPPED && mc.gameSettings.thirdPersonView == 0)
 			GL11.glTranslatef(0.3f, 0.2f, 0);

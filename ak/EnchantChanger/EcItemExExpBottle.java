@@ -1,14 +1,9 @@
 package ak.EnchantChanger;
 
-import java.util.ArrayList;
-
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
-import ak.EnchantChanger.Client.ClientProxy;
 
 public class EcItemExExpBottle extends Item
 {
@@ -16,10 +11,6 @@ public class EcItemExExpBottle extends Item
 	public EcItemExExpBottle(int par1) {
 		super(par1);
 
-	}
-	public String getTextureFile()
-	{
-		return EnchantChanger.EcSprites;
 	}
 	public boolean hasEffect(ItemStack par1ItemStack)
 	{
@@ -45,10 +36,4 @@ public class EcItemExExpBottle extends Item
 
 		return par1ItemStack;
 	}
-//	@Override
-//	public Item setIconIndex(int par1)
-//	{
-//		this.iconIndex = par1;
-//		return this;
-//	}
 }
