@@ -2,9 +2,7 @@ package ak.EnchantChanger;
 
 import java.util.List;
 import java.util.Random;
-import static org.lwjgl.opengl.GL11.GL_BLEND;
-import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
-import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.creativetab.CreativeTabs;
@@ -15,7 +13,6 @@ import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
@@ -28,11 +25,8 @@ import net.minecraft.util.Vec3;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.IItemRenderer.ItemRenderType;
-import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -89,7 +83,14 @@ public class EcItemMateria extends Item implements IItemRenderer
 			int Lv = EnchantChanger.getMateriaEnchLv(itemstack);
 			if(entityplayer.isSneaking() && Lv > 1)
 			{
-				entityplayer.addExperienceLevel(LevelUPEXP(itemstack, false));
+//				entityplayer.addExperienceLevel(LevelUPEXP(itemstack, false));
+				ItemStack expBottle;
+				if(Lv > 5)
+					expBottle = new ItemStack(EnchantChanger.ItemExExpBottle);
+				else
+					expBottle = new ItemStack(Item.expBottle);
+				if(!world.isRemote)
+					entityplayer.dropPlayerItem(expBottle);
 				this.addMateriaLv(itemstack, -1);
 			}
 			else if ((entityplayer.experienceLevel >= LevelUPEXP(itemstack,true) || entityplayer.capabilities.isCreativeMode) && Lv != 0)

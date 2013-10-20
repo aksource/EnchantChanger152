@@ -1,9 +1,6 @@
 package ak.BigItems;
 
-import java.util.ArrayList;
-
 import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.Property;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -46,7 +43,7 @@ public class BigItems
 	@PostInit
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		for(int i = 0;i<ItemIDs.length;i++)
-			System.out.println(ItemIDs[i]);
+//		for(int i = 0;i<ItemIDs.length;i++)
+//			System.out.println(ItemIDs[i]);
 	}
 }

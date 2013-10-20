@@ -20,6 +20,12 @@ local.properties
 /argo
 /ibxm
 /paulscode
+/buildcraft
+/mods/buildcraft
+/ic2
+/gfx
+/lang
+/IR
 /net/minecraftforge
 /net/minecraft/block
 /net/minecraft/client
@@ -52,7 +58,7 @@ fmlversion.properties
 forge_logo.png
 mcp.png
 Start.java
-*.info
+/*.info
 *.cfg
 
 
