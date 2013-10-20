@@ -20,7 +20,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid="Booster", name="Booster", version="1.5.2v3")
+@Mod(modid="Booster", name="Booster", version="1.5.2v4")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false, channels={"Booster"}, packetHandler=PacketHandler.class)
 public class Booster
 {

@@ -43,7 +43,6 @@ public class LivingEventHooks
 	public void boostKeyCheck(EntityPlayer player)
 	{
 		boosterSwitch =!boosterSwitch;
-//		boosterSwitch = BoosterKeyHandler.boosterKeydown;
 		String switchdata="";
 		if(boosterSwitch)
 		{
@@ -84,7 +83,6 @@ public class LivingEventHooks
 								ep.motionX -= MathHelper.sin(f1) * getmove();
 								ep.motionZ += MathHelper.cos(f1) * getmove();
 								this.spawnCloud = true;
-//								commonprocess(epMP,world);
 							}
 							else if(epsp.movementInput.moveForward < 0)
 							{
@@ -93,7 +91,6 @@ public class LivingEventHooks
 								ep.motionX -= MathHelper.sin(f1) * -getmove();
 								ep.motionZ += MathHelper.cos(f1) * -getmove();
 								this.spawnCloud = true;
-//								commonprocess(epMP,world);
 							}
 							else if(epsp.movementInput.moveStrafe < 0)
 							{
@@ -102,7 +99,6 @@ public class LivingEventHooks
 								ep.motionX -= MathHelper.sin(f1+(float)(Math.PI/2)) * getmove();
 								ep.motionZ += MathHelper.cos(f1+(float)(Math.PI/2)) * getmove();
 								this.spawnCloud = true;
-//								commonprocess(epMP,world);
 							}
 							else if(epsp.movementInput.moveStrafe > 0)
 							{
@@ -112,7 +108,6 @@ public class LivingEventHooks
 								ep.motionX -= MathHelper.sin(f1-(float)(Math.PI/2)) * getmove();
 								ep.motionZ += MathHelper.cos(f1-(float)(Math.PI/2)) * getmove();
 								this.spawnCloud = true;
-//								commonprocess(epMP,world);
 							}
 
 							else if(ep.isJumping && canjump)
@@ -120,14 +115,12 @@ public class LivingEventHooks
 								ep.motionY=ep.motionX=ep.motionZ =0;
 								ep.motionY += getmove();
 								this.spawnCloud = true;
-//								commonprocess(epMP,world);
 							}
 							else if(ep.isSneaking())
 							{
 								ep.motionY=ep.motionX=ep.motionZ =0;
 								ep.motionY -= getmove();
 								this.spawnCloud = true;
-//								commonprocess(epMP,minecraft.theWorld);
 							}
 						}
 						else if(ep.inventory.armorInventory[2].itemID == Booster.BoosterID)
@@ -137,7 +130,6 @@ public class LivingEventHooks
 								ep.motionY=ep.motionX=ep.motionZ =0;
 								ep.motionY += getmove();
 								this.spawnCloud = true;
-//								commonprocess(epMP,minecraft.theWorld);
 							}
 						}
 						PacketDispatcher.sendPacketToServer(PacketHandler.getPacket(this));
@@ -154,19 +146,19 @@ public class LivingEventHooks
 			{
 				CanBoost = Booster.BoostPower;
 			}
-			if(ep.isSneaking())
+			if((ep.inventory.armorInventory[2].itemID == Booster.BoosterID || ep.inventory.armorInventory[2].itemID == Booster.BoosterID + 1) && ep.isSneaking())
 			{
 				ep.fallDistance = 0F;
 			}
 		}
 	}
-	void commonprocess(EntityPlayer ep,World world)
+	private void commonprocess(EntityPlayer ep,World world)
 	{
 		world.spawnParticle("cloud", ep.posX, ep.posY + 0.1D, ep.posZ, 0.0D, 0.0D, 0.0D);
 		CanBoost--;
 		ep.fallDistance = 0F;
 	}
-	double getmove()
+	private double getmove()
 	{
 		return Booster.movement * 0.5d;
 	}
