@@ -141,6 +141,10 @@ public class InteractBlockHook
 		List<EntityItem> list = world.getEntitiesWithinAABB(EntityItem.class, player.boundingBox.expand(5d, 5d, 5d));
 		if(list == null)
 			return;
+		getDestroyedBlockItem(world, player, block, item ,list);
+	}
+	public void getDestroyedBlockItem(World world, EntityPlayer player, Block block, ItemStack item, List<EntityItem> list)
+	{
 		double d0;
 		double d1;
 		double d2;
@@ -190,6 +194,7 @@ public class InteractBlockHook
 			item = tooldata.tools[slotNum];
 		}
 		Iterator it = blocklist.iterator();
+		List<EntityItem> list;
 		while(it.hasNext() && !flag)
 		{
 			chunk = (ChunkPosition) it.next();
@@ -204,7 +209,8 @@ public class InteractBlockHook
 				if(world.setBlock(chunk.x, chunk.y, chunk.z, 0))
 				{
 					block.onBlockDestroyedByPlayer(world, block.blockID, chunk.x, chunk.y, chunk.z);
-					this.harvestBlock(world, player, chunk.x, chunk.y, chunk.z, meta, block);
+//					this.harvestBlock(world, player, chunk.x, chunk.y, chunk.z, meta, block);
+					block.harvestBlock(world, player, MathHelper.ceiling_double_int( player.posX), MathHelper.ceiling_double_int( player.posY), MathHelper.ceiling_double_int( player.posZ), meta);
 					if(item.stackSize == 0)
 					{
 						player.destroyCurrentEquippedItem();
@@ -222,9 +228,6 @@ public class InteractBlockHook
 		int dx = 0;
 		int dy = 0;
 		int dz = 0;
-		int ddx = 0;
-		int ddy = 0;
-		int ddz = 0;
 		int id;
 		ChunkPosition chunk;
 		blocklist.add(chunkpos);
@@ -235,9 +238,6 @@ public class InteractBlockHook
 			dx = ForgeDirection.getOrientation(side).offsetX;
 			dy = ForgeDirection.getOrientation(side).offsetY;
 			dz = ForgeDirection.getOrientation(side).offsetZ;
-			ddx = blockPos[0] - (chunkpos.x + dx);
-			ddy = blockPos[1] - (chunkpos.y + dy);
-			ddz = blockPos[2] - (chunkpos.z + dz);
 
 			chunk = new ChunkPosition(chunkpos.x + dx,chunkpos.y + dy,chunkpos.z + dz);
 			id = world.getBlockId(chunk.x, chunk.y, chunk.z);
