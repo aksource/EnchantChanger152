@@ -49,6 +49,8 @@ public class LivingEventHooks
 	@ForgeSubscribe
 	public void LivingDeath(LivingDeathEvent event)
 	{
+		if(!EnchantChanger.enableAPSystem)
+			return;
 		DamageSource killer = event.source;
 		EntityLiving entity = event.entityLiving;
 		if(killer.getEntity() != null && killer.getEntity() instanceof EntityPlayer 
