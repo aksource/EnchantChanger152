@@ -22,6 +22,7 @@ local.properties
 /paulscode
 /buildcraft
 /mods/buildcraft
+/mods/minecraft
 /ic2
 /gfx
 /lang
@@ -50,6 +51,7 @@ local.properties
 /net/minecraft/util
 /net/minecraft/village
 /net/minecraft/world
+/net/minecraft/storagebox
 /net/minecraft/src/*.java
 !mod_MergeEnchantment.java
 !MergeEnchantmentRecipes.java

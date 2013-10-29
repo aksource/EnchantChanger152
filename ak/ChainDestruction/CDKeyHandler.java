@@ -9,7 +9,9 @@ import cpw.mods.fml.common.TickType;
 public class CDKeyHandler extends KeyHandler{
 
 	public static boolean regItemKeyDown = false;
+	public static boolean regItemKeyUp = true;
 	public static boolean digUnderKeyDown = false;
+	public static boolean digUnderKeyUp = true;
 	public CDKeyHandler(KeyBinding[] keyBindings, boolean[] repeats) {
 		super(keyBindings, repeats);
 	}
@@ -41,10 +43,12 @@ public class CDKeyHandler extends KeyHandler{
 			if(kb == ClientProxy.registItemKey)
 			{
 				this.regItemKeyDown = false;
+				this.regItemKeyUp = true;
 			}
 			else if(kb == ClientProxy.digUnderKey)
 			{
 				this.digUnderKeyDown = false;
+				this.digUnderKeyUp = true;
 			}
 		}
 	}
