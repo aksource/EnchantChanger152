@@ -155,7 +155,7 @@ public class EnchantChanger //extends BaseMod
 		Debug = DebugProp.getBoolean(false);
 		enableAPSystem = config.get(Configuration.CATEGORY_GENERAL, "enableAPSystem", true).getBoolean(true);
 		enableDungeonLoot = config.get(Configuration.CATEGORY_GENERAL, "enableDungeonLoot", true).getBoolean(true);
-		aPBasePoint = config.get(Configuration.CATEGORY_GENERAL, "APBAsePoint", 100).getInt();
+		aPBasePoint = config.get(Configuration.CATEGORY_GENERAL, "APBAsePoint", 200).getInt();
 		Property SwordIdsProp = config.get(Configuration.CATEGORY_GENERAL, "Extra SwordIds", "267");
 		SwordIdsProp.comment="Put Ids which you want to operate as  swords. Usage: 1,2,3";
 		SwordIds= SwordIdsProp.getString();
