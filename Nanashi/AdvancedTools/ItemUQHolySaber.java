@@ -1,7 +1,5 @@
 package Nanashi.AdvancedTools;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -13,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemUQHolySaber extends ItemUniqueArms
 {
@@ -30,12 +30,8 @@ public class ItemUQHolySaber extends ItemUniqueArms
 	public void registerIcons(IconRegister par1IconRegister)
 	{
 		this.itemIcon = par1IconRegister.registerIcon(AdvancedTools.textureDomain + "HolySaber");
-//		this.iconIndex = par1IconRegister.func_94245_a("AdvancedTools:HolySaber");
 	}
-	/**
-	 * Called each tick as long the item is on a player inventory. Uses by maps to check if is on a player hand and
-	 * update it's contents.
-	 */
+
 	public void onUpdate(ItemStack var1, World var2, Entity var3, int var4, boolean var5)
 	{
 		super.onUpdate(var1, var2, var3, var4, var5);
@@ -51,19 +47,12 @@ public class ItemUQHolySaber extends ItemUniqueArms
 		}
 	}
 
-	/**
-	 * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
-	 * the damage on the stack.
-	 */
 	public boolean hitEntity(ItemStack var1, EntityLiving var2, EntityLiving var3)
 	{
 		var1.damageItem(1, var3);
 		return true;
 	}
 
-	/**
-	 * Returns the damage against a given entity.
-	 */
 	public int getDamageVsEntity(Entity var1)
 	{
 		byte var2 = 0;

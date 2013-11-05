@@ -99,7 +99,6 @@ public class AdvancedTools
 	{
 		this.itemSetup();
 		this.addRecipe();
-		this.setItemIcon();
 		this.setName();
 		this.entitySetup();
 		proxy.registerRenderInformation();
@@ -112,13 +111,6 @@ public class AdvancedTools
 
 	public void entitySetup()
 	{
-//		EntityRegistry.registerGlobalEntityID(Entity_HighSkeleton.class, "HighSkeleton", EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
-//		EntityRegistry.registerGlobalEntityID(Entity_SkeletonSniper.class, "SkeletonSniper", EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
-//		EntityRegistry.registerGlobalEntityID(Entity_ZombieWarrior.class, "ZombieWarrior", EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
-//		EntityRegistry.registerGlobalEntityID(Entity_FireZombie.class, "FireZombie", EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
-//		EntityRegistry.registerGlobalEntityID(Entity_HighSpeedCreeper.class, "HighSpeedCreeper", EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
-//		EntityRegistry.registerGlobalEntityID(Entity_GoldCreeper.class, "GoldCreeper", EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
-
 		EntityRegistry.registerModEntity(Entity_ThrowingKnife.class, "ThrowingKnife", 0, this, 250, 1, true);
 		EntityRegistry.registerModEntity(Entity_HighSkeleton.class, "HighSkeleton", 1, this, 250, 1, true);
 		EntityRegistry.registerModEntity(Entity_SkeletonSniper.class, "SkeletonSniper", 2, this, 250, 1, true);
@@ -231,46 +223,6 @@ public class AdvancedTools
 		GameRegistry.addRecipe(new ItemStack(HolySaber), new Object[] {"XBX", "EAC", "XDX", 'A', BlazeBlade, 'B', IceHold, 'C', AsmoSlasher, 'D', PlanetGuardian, 'E', StormBringer, 'X', Block.glowStone});
 		GameRegistry.addRecipe(new ItemStack(ThrowingKnife, 16), new Object[] {" X", "# ", 'X', Item.ingotIron, '#', Item.stick});
 		GameRegistry.addShapelessRecipe(new ItemStack(PoisonKnife), new Object[] {ThrowingKnife, Item.spiderEye});
-	}
-
-	public void setItemIcon()
-	{
-//		RedEnhancer.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/EnhancerR.png"));
-//		BlueEnhancer.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/EnhancerB.png"));
-//		UGWoodPickaxe.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/UGWoodpickaxe.png"));
-//		UGWoodShovel.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/UGWoodshovel.png"));
-//		UGWoodAxe.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/UGWoodaxe.png"));
-//		UGStonePickaxe.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/UGStonepickaxe.png"));
-//		UGStoneShovel.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/UGStoneshovel.png"));
-//		UGStoneAxe.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/UGStoneaxe.png"));
-//		UGIronPickaxe.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/UGIronpickaxe.png"));
-//		UGIronShovel.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/UGIronshovel.png"));
-//		UGIronAxe.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/UGIronaxe.png"));
-//		UGDiamondPickaxe.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/UGDiamondpickaxe.png"));
-//		UGDiamondShovel.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/UGDiamondshovel.png"));
-//		UGDiamondAxe.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/UGDiamondaxe.png"));
-//		UGGoldPickaxe.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/UGGoldpickaxe.png"));
-//		UGGoldShovel.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/UGGoldshovel.png"));
-//		UGGoldAxe.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/UGGoldaxe.png"));
-//		BlazeBlade.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/BlazeBlade.png"));
-//		IceHold.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/IceHold.png"));
-//		AsmoSlasher.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/AsmoSlasher.png"));
-//		PlanetGuardian.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/PlanetGuardian.png"));
-//		StormBringer.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/StormBringer.png"));
-//		NEGI.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/NEGI.png"));
-//		LuckLuck.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/Luckluck.png"));
-//		SmashBat.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/SmashBat.png"));
-//		HolySaber.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/HolySaber.png"));
-//		DevilSword.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/GenocideBlade.png"));
-//		InfiniteSword.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/Infinitysword.png"));
-//		InfinitePickaxe.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/Infinitypickaxe.png"));
-//		InfiniteAxe.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/Infinityaxe.png"));
-//		InfiniteShovel.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/Infinityshovel.png"));
-//		InfiniteHoe.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/Infinityhoe.png"));
-//		CrossBow.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/CrossBow.png"));
-//		ThrowingKnife.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/ThrowingKnife.png"));
-//		PoisonKnife.setIconIndex(ModLoader.addOverride("/gui/items.png", "/UGTools/PoisonKnife.png"));
-//		GenocideBlade.setIconIndex(DevilSword.iconIndex);
 	}
 
 	public void setName()
