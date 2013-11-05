@@ -2,12 +2,19 @@ package ak.MultiToolHolders;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.storagebox.ItemStorageBox;
 import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.Property;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -50,7 +57,11 @@ public class MultiToolHolders
 	public static int guiIdHolder5 = 1;
 	public static int guiIdHolder9 = 2;
 	public static int guiIdHolder7 = 3;
+	
+	public static int toolTipX = 5;
+	public static int toolTipY = 20;
 
+	public static boolean loadSB = false;
 
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event)
@@ -60,10 +71,7 @@ public class MultiToolHolders
 
 		ItemIDShift = config.get(Configuration.CATEGORY_ITEM, "Item ID Shift Number", 7000).getInt();
 
-
-		Property DebugProp = config.get(Configuration.CATEGORY_GENERAL, "Debug mode", false);
-		DebugProp.comment="For Debugger";
-		Debug = DebugProp.getBoolean(false);
+		Debug = config.get(Configuration.CATEGORY_GENERAL, "Debug mode", false, "For Debugger").getBoolean(false);
 
 		config.save();
 	}
@@ -75,7 +83,7 @@ public class MultiToolHolders
 		ItemMultiToolHolder9 = (new ItemMultiToolHolder(ItemIDShift - 256 + 2, 9)).setUnlocalizedName(this.TextureDomain + "Holder9").setCreativeTab(CreativeTabs.tabTools);
 		ItemMultiToolHolder7 = (new ItemMultiToolHolder(ItemIDShift - 256 + 3, 7)).setUnlocalizedName(this.TextureDomain + "Holder7").setCreativeTab(CreativeTabs.tabTools);
 
-
+		MinecraftForge.EVENT_BUS.register(new PlayerPickUpHooks());
 
 
 		NetworkRegistry.instance().registerGuiHandler(this, proxy);
@@ -93,6 +101,57 @@ public class MultiToolHolders
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		AddLocalization();
+		loadSB = Loader.isModLoaded("mod_StorageBox");
+	}
+	public class PlayerPickUpHooks
+	{
+		@ForgeSubscribe
+		public void pickUpEvent(EntityItemPickupEvent event)
+		{
+			if(loadSB)
+			{
+				EntityPlayer player = event.entityPlayer;
+				EntityItem item = event.item;
+				int stackSize = item.getEntityItem().stackSize;
+				ItemStack[] inv = player.inventory.mainInventory;
+				if(pickUpItemInToolHolder(player.worldObj,inv,item.getEntityItem()))
+				{
+					event.setCanceled(true);
+					player.worldObj.playSoundAtEntity(item, "random.pop", 0.2F, ((player.worldObj.rand.nextFloat() - player.worldObj.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+					player.onItemPickup(item, stackSize);
+				}
+			}
+		}
+		private boolean pickUpItemInToolHolder(World world,ItemStack[] inv, ItemStack item)
+		{
+			ToolHolderData data;
+			ItemStack storageStack;
+			for(int i=0;i<inv.length;i++)
+			{
+				if(inv[i] != null && inv[i].getItem() instanceof ItemMultiToolHolder)
+				{
+					data = ItemMultiToolHolder.getToolData(inv[i], world);
+					if(data != null)
+					{
+						for(int j=0;j<data.getSizeInventory();j++)
+						{
+							if(data.tools[j] != null && data.tools[j].getItem() instanceof ItemStorageBox
+									&& ItemStorageBox.isAutoCollect(data.tools[j]))
+							{
+								storageStack = ItemStorageBox.peekItemStackAll(data.tools[j]);
+								if(storageStack != null && item.isItemEqual(storageStack))
+								{
+									ItemStorageBox.addItemStack(data.tools[j], item);
+									item.stackSize = 0;
+									return true;
+								}
+							}
+						}
+					}
+				}
+			}
+			return false;
+		}
 	}
 	public void AddLocalization()
 	{

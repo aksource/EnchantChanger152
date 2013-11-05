@@ -24,6 +24,7 @@ public class ClientProxy extends CommonProxy
 	{
 
 		KeyBindingRegistry.registerKeyBinding(new MTHKeyHandler(Keys, repeat));
+//		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 		MinecraftForgeClient.registerItemRenderer(MultiToolHolders.ItemIDShift, (IItemRenderer) MultiToolHolders.ItemMultiToolHolder3);
 		MinecraftForgeClient.registerItemRenderer(MultiToolHolders.ItemIDShift + 1, (IItemRenderer) MultiToolHolders.ItemMultiToolHolder5);
 		MinecraftForgeClient.registerItemRenderer(MultiToolHolders.ItemIDShift + 2, (IItemRenderer) MultiToolHolders.ItemMultiToolHolder9);

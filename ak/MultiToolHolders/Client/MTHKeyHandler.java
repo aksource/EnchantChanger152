@@ -11,6 +11,9 @@ public class MTHKeyHandler extends KeyHandler
 	public static boolean openKeydown = false;
 	public static boolean nextKeydown = false;
 	public static boolean prevKeydown = false;
+	public static boolean openKeyup = true;
+	public static boolean nextKeyup = true;
+	public static boolean prevKeyup = true;
 	public MTHKeyHandler(KeyBinding[] keyBindings, boolean[] repeatings) {
 		super(keyBindings, repeatings);
 	}
@@ -41,14 +44,17 @@ public class MTHKeyHandler extends KeyHandler
 		if(kb == ClientProxy.OpenKey)
 		{
 			openKeydown = false;
+			openKeyup = true;
 		}
 		else if(kb == ClientProxy.NextKey)
 		{
 			nextKeydown = false;
+			nextKeyup = true;
 		}
 		else if(kb == ClientProxy.PrevKey)
 		{
 			prevKeydown = false;
+			prevKeyup = true;
 		}
 	}
 
