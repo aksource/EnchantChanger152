@@ -5,7 +5,6 @@ import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderCreeper;
 import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
 import Nanashi.AdvancedTools.CommonProxy;
 import Nanashi.AdvancedTools.CommonTickHandler;
 import Nanashi.AdvancedTools.Entity_BBFireBall;
@@ -29,8 +28,6 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerRenderInformation()
 	{
-//		MinecraftForgeClient.preloadTexture("/ak/EnchantChanger/mod_EnchantChanger/gui/items.png");
-//	    MinecraftForgeClient.preloadTexture("/ak/EnchantChanger/mod_EnchantChanger/terrain.png");
 	    RenderingRegistry.registerEntityRenderingHandler(Entity_BBFireBall.class, new Render_UQMagics());
 	    RenderingRegistry.registerEntityRenderingHandler(Entity_IHFrozenMob.class, new Render_UQFreezer());
 	    RenderingRegistry.registerEntityRenderingHandler(Entity_PGPowerBomb.class, new Render_UQMagics());
