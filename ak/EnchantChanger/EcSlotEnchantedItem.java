@@ -45,13 +45,11 @@ public class EcSlotEnchantedItem extends Slot
 			}
 			if(IP.addItemStackToInventory(SlotStack.copy()))
 			{
-				//this.materializeResult.decrStackSize(i, 1);
 				this.materializeResult.setInventorySlotContents(i, null);
 			}
 			else
 			{
 				par1EntityPlayer.dropPlayerItem(SlotStack.copy());
-				//this.materializeResult.decrStackSize(i, 1);
 				this.materializeResult.setInventorySlotContents(i, null);
 			}
 		}

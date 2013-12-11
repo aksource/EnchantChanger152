@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -17,12 +18,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import ak.MultiToolHolders.ItemMultiToolHolder;
-import ak.MultiToolHolders.ToolHolderData;
 
 import com.google.common.io.ByteArrayDataInput;
 
@@ -187,11 +189,15 @@ public class InteractBlockHook
 				this.SearchBlock(world, player, block, chunk, ForgeDirection.OPPOSITES[side]);
 			}
 		}
+		boolean isMultiToolHolder = false;
+		int slotNum = 0;
+		IInventory tooldata = null;
 		if(ChainDestruction.loadMTH && item.getItem() instanceof ItemMultiToolHolder)
 		{
-			ToolHolderData tooldata = ((ItemMultiToolHolder)item.getItem()).tools;
-			int slotNum = ((ItemMultiToolHolder)item.getItem()).SlotNum;
-			item = tooldata.tools[slotNum];
+			tooldata = ((ItemMultiToolHolder)item.getItem()).tools;
+			slotNum = ((ItemMultiToolHolder)item.getItem()).SlotNum;
+			item = ((IInventory)tooldata).getStackInSlot(slotNum);
+			isMultiToolHolder = true;
 		}
 		Iterator it = blocklist.iterator();
 		List<EntityItem> list;
@@ -213,7 +219,7 @@ public class InteractBlockHook
 					block.harvestBlock(world, player, MathHelper.ceiling_double_int( player.posX), MathHelper.ceiling_double_int( player.posY), MathHelper.ceiling_double_int( player.posZ), meta);
 					if(item.stackSize == 0)
 					{
-						player.destroyCurrentEquippedItem();
+						destroyItem(player, item, isMultiToolHolder, tooldata, slotNum);
 						flag = true;
 						break;
 					}
@@ -221,6 +227,18 @@ public class InteractBlockHook
 				else flag = true;
 			}
 			else flag = true;
+		}
+	}
+	public void destroyItem(EntityPlayer player, ItemStack item, boolean isInMultiTool, IInventory tools, int slotnum)
+	{
+		if(isInMultiTool)
+		{
+			tools.setInventorySlotContents(slotnum, null);
+			MinecraftForge.EVENT_BUS.post(new PlayerDestroyItemEvent(player, item));
+		}
+		else
+		{
+			player.destroyCurrentEquippedItem();
 		}
 	}
 	public void SearchBlock(World world, EntityPlayer player, Block block, ChunkPosition chunkpos, int face)

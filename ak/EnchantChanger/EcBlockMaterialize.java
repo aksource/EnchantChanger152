@@ -23,9 +23,8 @@ public class EcBlockMaterialize extends BlockContainer
 		super(par1, Material.rock);
 		setHardness(5F);
 		setResistance(2000.0F);
-//		setBlockName("EnchantChanger");
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
-        this.setLightOpacity(0);
+		this.setLightOpacity(0);
 	}
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -36,62 +35,52 @@ public class EcBlockMaterialize extends BlockContainer
 		this.bottom = par1IconRegister.registerIcon(EnchantChanger.EcTextureDomain + "EnchantChanger-bottom");
 	}
 	public int idDropped(int i, Random random, int j)
-    {
-        return this.blockID;
-    }
+	{
+		return this.blockID;
+	}
 	public boolean renderAsNormalBlock()
-    {
-        return false;
-    }
+	{
+		return false;
+	}
 	public boolean isOpaqueCube()
-    {
-        return false;
-    }
+	{
+		return false;
+	}
 
 	public int quantityDropped(Random random)
-    {
-        return 1;
-    }
+	{
+		return 1;
+	}
 
 	public Icon getIcon(int par1, int par2)
-    {
+	{
 		return par1 == 0 ? this.bottom : (par1 == 1 ? this.top : this.side);
-    }
-//	public Icon getBlockTextureFromSide(int par1)
-//    {
-//        return par1 == 0 ? this.bottom : (par1 == 1 ? this.top : this.side);
-//    }
+	}
 	public void addCreativeItems(ArrayList itemList)
-    {
-            itemList.add(new ItemStack(this, 1, 0));
-    }
+	{
+		itemList.add(new ItemStack(this, 1, 0));
+	}
 
 	public TileEntity getBlockEntity()
-    {
-        return new EcTileEntityMaterializer();
-    }
+	{
+		return null;
+	}
 
-	/**
-    * Called upon block activation (right click on the block.)
-    */
-   public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
-   {
+	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+	{
 		par5EntityPlayer.openGui(EnchantChanger.instance, 0, par1World, par2, par3, par4);
 		return true;
-   }
+	}
 
-	/**
-     * ejects contained items into the world, and notifies neighbours of an update, as appropriate
-     */
-    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
-    {
-        super.breakBlock(par1World, par2, par3, par4, par5, par6);
-        par1World.removeBlockTileEntity(par2, par3, par4);
-    }
+	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
+	{
+		super.breakBlock(par1World, par2, par3, par4, par5, par6);
+		par1World.removeBlockTileEntity(par2, par3, par4);
+	}
 	@Override
 	public TileEntity createNewTileEntity(World var1)
 	{
-		return new EcTileEntityMaterializer();
+		return null;
 	}
 
 }

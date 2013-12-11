@@ -24,7 +24,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.world.World;
 import ak.MultiToolHolders.ItemMultiToolHolder;
 
 public class EcContainerMaterializer extends Container {
@@ -33,22 +32,14 @@ public class EcContainerMaterializer extends Container {
 	public static int SourceSlotNum = 9;
 	public IInventory materializeSource = new EcSlotMaterializer(this, "MaterializerSource", SourceSlotNum);
 	public IInventory materializeResult = new EcSlotResult(this, "MaterializerResult", ResultSlotNum);
-	protected EcTileEntityMaterializer tileEntity;
-	protected InventoryPlayer InvPlayer;
 	private ArrayList<Integer> ItemEnchList = new ArrayList<Integer>();
 	private ArrayList<Integer> ItemEnchLvList = new ArrayList<Integer>();
 	private ArrayList<Integer> MateriaEnchList = new ArrayList<Integer>();
 	private ArrayList<Integer> MateriaEnchLvList = new ArrayList<Integer>();
-	private World worldPointer;
 	private boolean materiadecLv = EnchantChanger.DecMateriaLv;
 
+	public EcContainerMaterializer (InventoryPlayer inventoryPlayer){
 
-	public EcContainerMaterializer (World par1world, InventoryPlayer inventoryPlayer){
-		//tileEntity = te;
-		InvPlayer = inventoryPlayer;
-		worldPointer = par1world;
-		//the Slot constructor takes the IInventory and the slot number in that it binds to
-		//and the x-y coordinates it resides on-screen
 		addSlotToContainer(new EcSlotItemToEnchant(this, this.materializeResult, this.materializeSource, 0, 35, 17));
 		addSlotToContainer(new EcSlotItemMateria(this, this.materializeResult, this.materializeSource, 1, 8, 36));
 		addSlotToContainer(new EcSlotItemMateria(this, this.materializeResult, this.materializeSource, 2, 26, 36));
@@ -67,7 +58,7 @@ public class EcContainerMaterializer extends Container {
 		addSlotToContainer(new EcSlotEnchantedItem(this, this.materializeSource, this.materializeResult, 6, 116, 54));
 		addSlotToContainer(new EcSlotEnchantedItem(this, this.materializeSource, this.materializeResult, 7, 134, 54));
 		addSlotToContainer(new EcSlotEnchantedItem(this, this.materializeSource, this.materializeResult, 8, 152, 54));
-		//commonly used vanilla code that adds the player's inventory
+
 		bindPlayerInventory(inventoryPlayer);
 		this.onCraftMatrixChanged(this.materializeSource);
 	}
@@ -150,17 +141,10 @@ public class EcContainerMaterializer extends Container {
 			{
 				return null;
 			}
-
 			slot.onPickupFromSlot(par1EntityPlayer, itemstack);
 		}
-
 		return retitem;
-
-		//return super.transferStackInSlot(par1EntityPlayer, par2);
 	}
-	/**
-	 * Callback for when the crafting matrix is changed.
-	 */
 	 @Override
 	 public void onCraftMatrixChanged(IInventory par1IInventory)
 	 {
@@ -308,36 +292,30 @@ public class EcContainerMaterializer extends Container {
 		 else
 			 return 0;
 	 }
-	 /**
-	  * Callback for when the crafting gui is closed.
-	  */
 	 @Override
-	 public void onCraftGuiClosed(EntityPlayer par1EntityPlayer)
+	 public void onCraftGuiClosed(EntityPlayer player)
 	 {
-		 super.onCraftGuiClosed(par1EntityPlayer);
+		 super.onCraftGuiClosed(player);
 
-		 if (!this.worldPointer.isRemote)
+		 if (!player.worldObj.isRemote)
 		 {
-			 //System.out.println("client");
 			 if (!this.ItemSourceLeft())
 			 {
 				 for (int var4 = 0; var4 < ResultSlotNum; ++var4)
 				 {
-					 //System.out.println(var2);
 					 ItemStack var5 = this.materializeResult.getStackInSlotOnClosing(var4);
 					 if (var5 != null)
 					 {
-						 par1EntityPlayer.dropPlayerItem(var5);
+						 player.dropPlayerItem(var5);
 					 }
 				 }
 			 }
 			 for (int var2 = 0; var2 < SourceSlotNum; ++var2)
 			 {
-				 //System.out.println(var2);
 				 ItemStack var3 = this.materializeSource.getStackInSlotOnClosing(var2);
 				 if (var3 != null)
 				 {
-					 par1EntityPlayer.dropPlayerItem(var3);
+					 player.dropPlayerItem(var3);
 				 }
 			 }
 
@@ -352,7 +330,7 @@ public class EcContainerMaterializer extends Container {
 	 }
 	 public Enchantment EnchKind(ItemStack item)
 	 {
-		 int EnchantmentKind = 256;
+		 int EnchantmentKind = Enchantment.enchantmentsList.length;
 		 for(int i = 0; i < Enchantment.enchantmentsList.length; i++)
 		 {
 			 if(EnchantmentHelper.getEnchantmentLevel(i, item) > 0)
@@ -361,7 +339,7 @@ public class EcContainerMaterializer extends Container {
 				 break;
 			 }
 		 }
-		 return EnchantmentKind != 256 ? Enchantment.enchantmentsList[EnchantmentKind]:Enchantment.enchantmentsList[0];
+		 return EnchantmentKind != Enchantment.enchantmentsList.length ? Enchantment.enchantmentsList[EnchantmentKind]:Enchantment.enchantmentsList[0];
 	 }
 	 public int EnchLv(ItemStack item)
 	 {
@@ -424,24 +402,24 @@ public class EcContainerMaterializer extends Container {
 	 {
 		 int var1 = par1ItemStack.itemID;
 		 System.out.println(var1);
-		 for(int i=0;i<EnchantChanger.SwordIdArray.size();i++)
+		 for(int i=0;i<EnchantChanger.extraSwordIDs.length;i++)
 		 {
-			 if(var1 == EnchantChanger.SwordIdArray.get(i))
+			 if(var1 == EnchantChanger.extraSwordIDs[i])
 				 return 1;
 		 }
-		 for(int i=0;i<EnchantChanger.BowIdArray.size();i++)
+		 for(int i=0;i<EnchantChanger.extraBowIDs.length;i++)
 		 {
-			 if(var1 == EnchantChanger.BowIdArray.get(i))
+			 if(var1 == EnchantChanger.extraBowIDs[i])
 				 return 2;
 		 }
-		 for(int i=0;i<EnchantChanger.ToolIdArray.size();i++)
+		 for(int i=0;i<EnchantChanger.extraToolIDs.length;i++)
 		 {
-			 if(var1 == EnchantChanger.ToolIdArray.get(i))
+			 if(var1 == EnchantChanger.extraToolIDs[i])
 				 return 3;
 		 }
-		 for(int i=0;i<EnchantChanger.ArmorIdArray.size();i++)
+		 for(int i=0;i<EnchantChanger.extraArmorIDs.length;i++)
 		 {
-			 if(var1 == EnchantChanger.ArmorIdArray.get(i))
+			 if(var1 == EnchantChanger.extraArmorIDs[i])
 				 return 6;
 		 }
 		 return 0;

@@ -35,7 +35,7 @@ public class EcContainerHugeMateria extends Container {
 		addSlotToContainer( new Slot(te, 2,53,48));
 		addSlotToContainer( new Slot(te, 3,80,34));
 		addSlotToContainer( new EcSlotMakeMateria(te, 4,116,34));
-		//commonly used vanilla code that adds the player's inventory
+		
 		bindPlayerInventory(inventoryPlayer);
 	}
 
@@ -159,24 +159,13 @@ public class EcContainerHugeMateria extends Container {
 		}
 
 		return retitem;
-
-		//return super.transferStackInSlot(par1EntityPlayer, par2);
 	}
-	/**
-	 * Callback for when the crafting matrix is changed.
-	 */
 	 @Override
-	 public void onCraftMatrixChanged(IInventory par1IInventory)
-	{
+	 public void onCraftMatrixChanged(IInventory par1IInventory){}
 
-	}
-	 /**
-	  * Callback for when the crafting gui is closed.
-	  */
 	 @Override
 	 public void onCraftGuiClosed(EntityPlayer par1EntityPlayer)
 	 {
 		 super.onCraftGuiClosed(par1EntityPlayer);
-
 	 }
 }

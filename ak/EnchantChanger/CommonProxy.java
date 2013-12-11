@@ -1,9 +1,11 @@
 package ak.EnchantChanger;
 
-import ak.EnchantChanger.Client.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import ak.EnchantChanger.Client.EcGuiHugeMateria;
+import ak.EnchantChanger.Client.EcGuiMaterializer;
+import ak.EnchantChanger.Client.EcGuiPortableEnchantment;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class CommonProxy implements IGuiHandler
@@ -13,15 +15,12 @@ public class CommonProxy implements IGuiHandler
 
 	public void registerTileEntitySpecialRenderer(){}
 
-	//returns an instance of the Container you made earlier
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 
 		if(id == EnchantChanger.guiIdMaterializer)
 		{
-			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-			//return new EcContainerMaterializer(world, player.inventory, (EcTileEntityMaterializer) tileEntity);
-			return new EcContainerMaterializer(world, player.inventory);
+			return new EcContainerMaterializer(player.inventory);
 		}
 		else if(id == EnchantChanger.guiIdPortableEnchantmentTable)
 		{
@@ -34,7 +33,6 @@ public class CommonProxy implements IGuiHandler
 				return new EcContainerHugeMateria(player.inventory, (EcTileEntityHugeMateria)t);
 			else
 			{
-//				System.out.println("error");
 				return null;
 			}
 		}
@@ -42,13 +40,11 @@ public class CommonProxy implements IGuiHandler
 			return null;
 	}
 
-	//returns an instance of the Gui you made earlier
 	@Override
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 		if(id == EnchantChanger.guiIdMaterializer)
 		{
-			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-			return new EcGuiMaterializer(world, player.inventory);
+			return new EcGuiMaterializer(player.inventory);
 		}
 		else if(id == EnchantChanger.guiIdPortableEnchantmentTable)
 		{
@@ -61,7 +57,6 @@ public class CommonProxy implements IGuiHandler
 				return new EcGuiHugeMateria(player.inventory, (EcTileEntityHugeMateria)t);
 			else
 			{
-//				System.out.println("error");
 				return null;
 			}
 		}

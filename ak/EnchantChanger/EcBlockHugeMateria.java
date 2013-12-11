@@ -1,9 +1,6 @@
 package ak.EnchantChanger;
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -13,6 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 public class EcBlockHugeMateria extends BlockContainer
 {
 	private boolean isBottom;
@@ -21,9 +20,7 @@ public class EcBlockHugeMateria extends BlockContainer
 		super(par1, Material.rock);
 		setHardness(5F);
 		setResistance(2000.0F);
-//		setBlockName("HugeMateria");
         this.setLightOpacity(0);
-//        this.blockIndexInTexture = 49;
         this.setLightValue(1.0f);
 	}
 	@Override
@@ -36,10 +33,6 @@ public class EcBlockHugeMateria extends BlockContainer
     {
         return false;
     }
-//	public String getTextureFile()
-//	{
-//		return EnchantChanger.EcTerrain;
-//	}
 	public boolean isOpaqueCube()
     {
         return false;
@@ -49,11 +42,6 @@ public class EcBlockHugeMateria extends BlockContainer
     {
         return 1;
     }
-
-//	public void addCreativeItems(ArrayList itemList)
-//	{
-//		itemList.add(new ItemStack(this, 1, 0));
-//	}
 	@Override
 	public TileEntity createNewTileEntity(World var1)
     {
@@ -113,10 +101,6 @@ public class EcBlockHugeMateria extends BlockContainer
 				{
 					par1World.setBlock(par2, par3, par4, 0, 0, 1);
 				}
-//				if (par5 > 0 && par5 != this.blockID)
-//				{
-//					this.onNeighborBlockChange(par1World, par2, par3 - 1, par4, par5);
-//				}
 			}
 		}
 		else
@@ -128,18 +112,6 @@ public class EcBlockHugeMateria extends BlockContainer
 				par1World.setBlock(par2, par3, par4, 0, 0, 1);
 				var7 = true;
 			}
-
-//			if (!par1World.isBlockSolidOnSide(par2, par3 - 1, par4, 1))
-//			{
-//				par1World.setBlockWithNotify(par2, par3, par4, 0);
-//				var7 = true;
-//
-//				if (par1World.getBlockId(par2, par3 + 1, par4) == this.blockID)
-//				{
-//					par1World.setBlockWithNotify(par2, par3 + 1, par4, 0);
-//				}
-//			}
-
 			if (var7)
 			{
 				if (!par1World.isRemote)
@@ -149,9 +121,6 @@ public class EcBlockHugeMateria extends BlockContainer
 			}
 		}
 	}
-	/**
-     * Called whenever the block is removed.
-     */
 	@Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
     {
@@ -181,13 +150,6 @@ public class EcBlockHugeMateria extends BlockContainer
 		case 1:this.setBlockBounds(0.0F, -1.0F, 0.0F, 1.0F, 2.0F, 1.0F);return;
 		case 2:this.setBlockBounds(0.0F, -2.0F, 0.0F, 1.0F, 1.0F, 1.0F);return;
 		}
-//		if(par1IBlockAccess.getBlockId(par2, par3 - 1, par4) == this.blockID)
-//			if(par1IBlockAccess.getBlockId(par2, par3 + 1, par4) == this.blockID)
-//				this.setBlockBounds(0.0F, -1.0F, 0.0F, 1.0F, 2.0F, 1.0F);
-//			else if(var1 ==2)
-//				this.setBlockBounds(0.0F, -2.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-//		else
-//			this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 3.0F, 1.0F);
 	}
 	@Override
 	public int idDropped(int par1, Random par2Random, int par3)

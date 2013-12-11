@@ -17,13 +17,9 @@ public class EcItemEnchantmentTable extends Item
 		return false;
 	}
 
-	/**
-	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-	 */
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
 		par3EntityPlayer.openGui(EnchantChanger.instance, EnchantChanger.guiIdPortableEnchantmentTable,par2World,0,0,0);
-
 		return par1ItemStack;
 	}
 }

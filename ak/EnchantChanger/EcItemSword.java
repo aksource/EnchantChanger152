@@ -24,6 +24,11 @@ import com.google.common.io.ByteArrayDataInput;
 import cpw.mods.fml.common.network.PacketDispatcher;
 public class EcItemSword extends ItemSword implements IItemRenderer
 {
+	private static EcModelUltimateWeapon UModel = new EcModelUltimateWeapon();
+	private static EcModelCloudSwordCore2 CCModel = new EcModelCloudSwordCore2();
+	private static EcModelCloudSword2 CModel = new EcModelCloudSword2();
+	private static EcModelSephirothSword SModel = new EcModelSephirothSword();
+	private static EcModelZackSword ZModel = new EcModelZackSword();
 	private boolean toggle = false;
 	public EcItemSword(int par1 , EnumToolMaterial toolMaterial)
 	{
@@ -91,11 +96,6 @@ public class EcItemSword extends ItemSword implements IItemRenderer
 	}
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		EcModelUltimateWeapon UModel = new EcModelUltimateWeapon();
-		EcModelCloudSwordCore2 CCModel = new EcModelCloudSwordCore2();
-		EcModelCloudSword2 CModel = new EcModelCloudSword2();
-		EcModelSephirothSword SModel = new EcModelSephirothSword();
-		EcModelZackSword ZModel = new EcModelZackSword();
 		if(item.getItem() instanceof EcItemZackSword)
 			ZModel.renderItem(item, (EntityLiving) data[1]);
 		else if(item.getItem() instanceof EcItemCloudSword)

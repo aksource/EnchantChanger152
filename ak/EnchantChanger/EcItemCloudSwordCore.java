@@ -144,34 +144,6 @@ public class EcItemCloudSwordCore extends EcItemSword
 		}
 		return Index >= 5;
 	}
-	//    public static int SwordNuminInventoryslot(EntityPlayer par1)
-	//    {
-	//    	int Sword=0;
-	//    	for (int i = 0;i<9;i++)
-	//    	{
-	//    		ItemStack SlotItem=par1.inventory.getStackInSlot(i);
-	//    		if(SlotItem!=null)
-	//    			if(SlotItem.getItem()==Item.swordDiamond||SlotItem.getItem()==Item.swordGold||SlotItem.getItem()==Item.swordIron)
-	//    				Sword++;
-	//    	}
-	//    	return Sword;
-	//    }
-	//    public int SwordNuminInventoryslot(EntityPlayerSP par1)
-	//    {
-	//    	int Sword=0;
-	//    	for (int i = 0;i<9;i++)
-	//    	{
-	//    		ItemStack SlotItem=par1.inventory.getStackInSlot(i);
-	//    		if(SlotItem!=null)
-	//    			if(SlotItem.getItem()==Item.swordDiamond||SlotItem.getItem()==Item.swordGold||SlotItem.getItem()==Item.swordIron)
-	//    				Sword++;
-	//    	}
-	//    	return Sword;
-	//    }
-	//    public boolean checkmode(int mode)
-	//	{
-	//		return mode != 0;
-	//	}
 	public void attackTargetEntityWithInventoryItem(Entity par1Entity, EntityPlayer player)
 	{
 		ItemStack sword;
