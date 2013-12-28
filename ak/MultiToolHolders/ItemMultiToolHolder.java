@@ -402,7 +402,8 @@ public class ItemMultiToolHolder extends Item implements IItemRenderer
 		{
 			this.tools.setInventorySlotContents(SlotNum, this.tools.getStackInSlot(SlotNum).getItem().onItemRightClick(this.tools.getStackInSlot(SlotNum), par2World, par3EntityPlayer));
 		}
-		par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
+		if(this.getItemUseAction(par1ItemStack) != EnumAction.none)
+			par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
 		return par1ItemStack;
 	}
     public boolean itemInteractionForEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving)
